@@ -1,0 +1,105 @@
+@import "~leaflet/dist/leaflet.css";
+
+.leaflet__mapContainer {
+  height: calc(100vh - 64px);
+}
+
+.map__container {
+  position: relative;
+  width: 100%;
+}
+
+.addButton {
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 25px;
+  background: #6320ee;
+  color: #bdbdbd;
+  font-size: 32px;
+  border: 1px solid #8075ff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  transition: all 1s ease-in-out;
+}
+
+.addButton.clicked {
+  box-shadow: inset rgba(0, 0, 0, 1) 0px 1px 2px;
+}
+
+.addLoc__toast {
+  z-index: 999;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
+  transform: translateY(-100%);
+}
+
+.addLoc__toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.addLoc__toastText {
+  background-color: #25262e;
+  color: #FFFFFF;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.addLoc__container{
+  position: absolute;
+  bottom: 0;
+  background: #FFFFFF;
+  width: 100%;
+  padding: 25px 0;
+  height: 25%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  box-shadow: 5px -3px 53px 0px rgba(0,0,0,0.79);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
+  transform: translateY(100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addLoc__container.show{
+  opacity: 1;
+  z-index: 9999;
+  transform: translateY(0);
+}
+
+.addLoc__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.addLoc__submit {
+  background: #6320ee;
+  color: #FFFFFF;
+  margin: 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  line-height: 10px;
+}
+
+.addLoc__title {
+  width: 100%;
+  border-radius: 5px;
+  margin: 15px;
+  border: 1px solid black;
+  padding: 10px;
+}
