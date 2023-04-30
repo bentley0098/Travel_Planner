@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { addDoc } from "@firebase/firestore";
 import { locationCollectionRef } from "../lib/firestore.collections";
 
-export default function AddLocation(location) {
+export default function AddLocation({location, onSubmit}) {
   const [title, setTitle] = useState("");
 
   function handleSubmit(e) {
@@ -11,7 +11,7 @@ export default function AddLocation(location) {
       return;
     }
 
-    var position = [location.location.lat, location.location.lng];
+    var position = [location.lat, location.lng];
 
     addDoc(locationCollectionRef, { title, position })
       .then((response) => {
@@ -20,7 +20,7 @@ export default function AddLocation(location) {
       .catch((err) => {
         console.log(err.message);
       });
-      
+
     setTitle('');
     // To style button and show toast after it is clicked
     var addLocToast = document.querySelector(".addLoc__toast");
@@ -28,6 +28,8 @@ export default function AddLocation(location) {
 
     addLocToast.classList.remove("show");
     addLocContainer.classList.remove("show");
+
+    onSubmit();
   }
   return (
     <div className="addLoc__container">

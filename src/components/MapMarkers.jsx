@@ -28,8 +28,8 @@ export default function MapMarkers() {
 
   return (
     <>
-      {locations.map((location, index) => (
-        <Marker position={location.data.position} icon={markerIcon} key={location.data.id}>
+      {locations.map((location) => (
+        <Marker position={location.data.position} icon={markerIcon} key={location.id}>
           <Popup>{location.data.title}</Popup>
         </Marker>
       ))}

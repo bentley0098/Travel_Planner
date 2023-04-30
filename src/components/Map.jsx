@@ -44,6 +44,7 @@ export default function MainMap() {
   }
 
   function handleReset() {
+    console.log("RESET")
     setIsListeningForClicks(false);
     setClickedLocation(null);
   }
@@ -86,7 +87,7 @@ export default function MainMap() {
         <TiPlus />
       </button>
 
-      <AddLocation location={clickedLocation} onSubmit={handleReset} />
+      <AddLocation location={clickedLocation} onSubmit={() => handleReset()} />
     </div>
   );
 }
