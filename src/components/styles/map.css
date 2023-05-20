@@ -12,7 +12,7 @@
 .addButton {
   z-index: 999;
   position: absolute;
-  bottom: 0;
+  bottom: 50px;
   right: 0;
   margin: 25px;
   background: #6320ee;
@@ -64,15 +64,15 @@
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   box-shadow: 5px -3px 53px 0px rgba(0,0,0,0.79);
-  opacity: 0;
   transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
   transform: translateY(100%);
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
 
 .addLoc__container.show{
+  display: flex;
   opacity: 1;
   z-index: 9999;
   transform: translateY(0);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -6,7 +6,7 @@ import {
   Marker,
   Popup,
 } from "react-leaflet";
-import "./map.css";
+import "./styles/map.css";
 import MapMarkers from "./MapMarkers";
 import { TiPlus } from "react-icons/ti";
 import L from "leaflet";
@@ -18,9 +18,12 @@ const markerIcon = new L.Icon({
   iconSize: [28],
 });
 
-export default function MainMap() {
+export default function MainMap({ selectedLocation, locations }) {
   const [isListeningForClicks, setIsListeningForClicks] = useState(false);
   const [clickedLocation, setClickedLocation] = useState(null);
+  const mapRef = useRef(null);
+
+  console.log(locations);
 
   function handleStartClicking() {
     setIsListeningForClicks(true);
@@ -43,8 +46,18 @@ export default function MainMap() {
     setClickedLocation(event.latlng);
   }
 
+  useEffect(() => {
+    // Get the map instance
+    const map = mapRef.current;
+    console.log(selectedLocation);
+    // Update the map center
+    if (map && selectedLocation) {
+      map.setView(selectedLocation, map.getZoom());
+    }
+  }, [selectedLocation]);
+
   function handleReset() {
-    console.log("RESET")
+    console.log("RESET");
     setIsListeningForClicks(false);
     setClickedLocation(null);
   }
@@ -57,17 +70,21 @@ export default function MainMap() {
         </span>
       </div>
       <MapContainer
-        center={[-33.865143, 151.2099]}
+        key={selectedLocation?.toString()}
+        center={selectedLocation || [-33.865143, 151.2099]}
         zoom={11}
         scrollWheelZoom={false}
         className="leaflet__mapContainer"
+        whenCreated={(mapInstance) => {
+          mapRef.current = mapInstance;
+        }}
       >
         <TileLayer
           attribution='© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
           url="https://api.mapbox.com/styles/v1/bentley0098/clgrg3iyl000a01r5722ybj3l/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYmVudGxleTAwOTgiLCJhIjoiY2xncmc3cDg4MDZoMDNucWlxc2d0YjVhZyJ9.Y_VfcMoqiyREg2M_bQhQ2w"
         />
 
-        <MapMarkers />
+        <MapMarkers locations={locations}/>
 
         {/* Register a click event listener if isListeningForClicks is true */}
         {isListeningForClicks && <MapClickHandler onClick={handleMapClick} />}

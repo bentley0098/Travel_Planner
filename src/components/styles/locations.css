@@ -1,0 +1,39 @@
+.realtime-locations-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFF;
+    padding: 20px;
+    border: 1px solid #BDBDBD;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-out; /* Add a transition effect to create sliding animation */
+    transform: translateY(90%);
+    z-index: 999;
+    height: 65vh;
+    padding-top: 50px;
+    overflow: scroll;
+  }
+  
+  .realtime-locations-container h2 {
+    margin-bottom: 10px;
+  }
+  
+  .realtime-locations-container.expanded {
+    transform: translateY(0%);
+  }
+
+  .realtime-locations-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .location-card {
+    background-color: lightgray;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
